@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prom Proposal</title>
+
+  <style>
+    /* Reset some default styles */
+    body, h1, p {
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(45deg, #ffd3e3, #a3d5ff); /* Gradient background */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      overflow: hidden; /* Hide overflowing shimmer effect */
+    }
+
+    /* Style the proposal container */
+    #proposal-container {
+      text-align: center;
+      padding: 20px;
+      background-color: #fff; /* White container background */
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+      animation: shimmer 2s infinite linear; /* Background shimmer animation */
+    }
+
+    @keyframes shimmer {
+      0% {
+        background-position: -200% 0; /* Initial position for shimmer effect */
+      }
+      100% {
+        background-position: 200% 0; /* Final position for shimmer effect */
+      }
+    }
+
+    /* Style the proposal text */
+    #proposal-text {
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+
+    /* Style the buttons */
+    .button {
+      display: inline-block;
+      padding: 15px 30px;
+      font-size: 20px;
+      text-align: center;
+      text-decoration: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: transform 0.2s ease-in-out, background-color 0.3s ease;
+      margin: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Style the 'Yes' button */
+    #yes-button {
+      background-color: #4caf50; /* Green for 'Yes' button */
+      color: #fff;
+    }
+
+    /* Hover effect for 'Yes' button */
+    #yes-button:hover {
+      background-color: #45a049;
+      transform: scale(1.05); /* Enlarge the button on hover */
+    }
+
+    /* Style the 'No' button */
+    #no-button {
+      background-color: #ff4d4d; /* Red for 'No' button */
+      color: #fff;
+      position: absolute;
+      transition: top 0.3s ease, left 0.3s ease; /* Smooth transition for movement */
+    }
+
+    /* Hover effect for 'No' button */
+    #no-button:not(.moving):hover {
+      background-color: #ff3333;
+      transform: scale(1.05); /* Enlarge the button on hover */
+    }
+  </style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var yesButton = document.getElementById('yes-button');
+      var noButton = document.getElementById('no-button');
+      var proposalContainer = document.getElementById('proposal-container');
+  
+      noButton.addEventListener('click', function () {
+        // Generate random positions within the proposal container
+        var maxX = proposalContainer.clientWidth - noButton.clientWidth;
+        var maxY = proposalContainer.clientHeight - noButton.clientHeight;
+  
+        var randomX = Math.floor(Math.random() * maxX);
+        var randomY = Math.floor(Math.random() * maxY);
+  
+        // Set the new position
+        noButton.classList.add('moving'); // Add moving class
+        noButton.style.left = randomX + 'px';
+        noButton.style.top = randomY + 'px';
+      });
+  
+      // Remove moving class after transition completes
+      noButton.addEventListener('transitionend', function () {
+        noButton.classList.remove('moving');
+      });
+  
+      yesButton.addEventListener('click', function () {
+        // Display response message
+        document.getElementById('proposal-text').innerHTML = "Alright, see you then!";
+      });
+    });
+  </script>
+  
+
+</head>
+<body>
+
+  <div id="proposal-container">
+    <div id="proposal-text">
+      <p>Would you like to go to prom with me?</p>
+    </div>
+    <a href="#" class="button" id="yes-button">Yes</a>
+    <a href="#" class="button" id="no-button">No</a>
+  </div>
+
+</body>
+</html>
